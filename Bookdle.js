@@ -172,3 +172,4 @@ fetch('Books(2).csv')
     // congratulations message modal with play again button
     // table of books like moviedle
     // make the inputs vanish after submit is pressed.
+    // make a mobile-friendly version
