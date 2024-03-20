@@ -1,5 +1,36 @@
 // Main function
 async function main(booksData) {
+    // Function to render the list of titles based on the search query
+    function renderTitles(searchQuery) {
+        // Clear previous list if searchQuery is empty
+        if (searchQuery === '') {
+            const titlesList = document.getElementById('titlesList');
+            titlesList.innerHTML = '';
+            return;
+        }
+
+        // Clear previous list
+        const titlesList = document.getElementById('titlesList');
+        titlesList.innerHTML = '';
+
+        // Filter titles based on search query
+        const filteredTitles = booksData.filter(book => book.Title.toLowerCase().startsWith(searchQuery.toLowerCase()));
+
+        // Render filtered titles
+        filteredTitles.forEach(book => {
+            const li = document.createElement('li');
+            li.textContent = book.Title;
+            titlesList.appendChild(li);
+        });
+    }
+
+    // Event listener for input field
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+        const searchQuery = searchInput.value.trim();
+        renderTitles(searchQuery);
+    });
+
     // A function to cut out a certain percentage of the words in the summary. Do not cut out any special characters or spaces. Replace all un-cut out letters with a _
     function summaryCutOut(percentage, summary) {
         let words = summary.split(" ");
@@ -107,69 +138,41 @@ async function main(booksData) {
     }
 }
 
-// Fetch the CSV file
-fetch('Books(1).csv')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to fetch CSV file');
-        }
-        return response.text();
-    })
-    .then(csvData => {
-        // Parse the CSV data
-        const rows = csvData.split('\n');
-        const headers = rows[0].split(',');
-        const booksData = [];
+// Declare a single array to hold data from both CSV files
+const booksData = [];
 
-        // Iterate over rows and create objects
-        for (let i = 1; i < rows.length; i++) {
-            const values = rows[i].split(',');
-            if (values.length === headers.length) {
-                const book = {};
-                for (let j = 0; j < headers.length; j++) {
-                    book[headers[j]] = values[j];
+// Fetch both CSV files simultaneously
+Promise.all([
+    fetch('Books(1).csv'),
+    fetch('Books(2).csv')
+])
+    .then(responses => Promise.all(responses.map(response => response.text())))
+    .then(csvDataArray => {
+        // Parse each CSV data and push it into the booksData array
+        csvDataArray.forEach(csvData => {
+            const rows = csvData.split('\n');
+            const headers = rows[0].split(',');
+
+            for (let i = 1; i < rows.length; i++) {
+                const values = rows[i].split(',');
+                if (values.length === headers.length) {
+                    const book = {};
+                    for (let j = 0; j < headers.length; j++) {
+                        book[headers[j]] = values[j];
+                    }
+                    booksData.push(book);
                 }
-                booksData.push(book);
             }
-        }
+        });
+
+        // Call the main function with the combined booksData array
+        main(booksData);
     })
     .catch(error => console.error('Error fetching or parsing CSV:', error));
-
-    // Fetch the CSV file
-fetch('Books(2).csv')
-.then(response => {
-    if (!response.ok) {
-        throw new Error('Failed to fetch CSV file');
-    }
-    return response.text();
-})
-.then(csvData => {
-    // Parse the CSV data
-    const rows = csvData.split('\n');
-    const headers = rows[0].split(',');
-    const booksData = [];
-
-    // Iterate over rows and create objects
-    for (let i = 1; i < rows.length; i++) {
-        const values = rows[i].split(',');
-        if (values.length === headers.length) {
-            const book = {};
-            for (let j = 0; j < headers.length; j++) {
-                book[headers[j]] = values[j];
-            }
-            booksData.push(book);
-        }
-    }
-
-    // Call the main function with the booksData array
-    main(booksData);
-})
-.catch(error => console.error('Error fetching or parsing CSV:', error));
 
     // scrollbar color dark
     // dont make it so have to reload the page to play again
     // dont make the you got it wrong thingie alerts
     // congratulations message modal with play again button
-    // table of books like moviedle
     // make the inputs vanish after submit is pressed.
-    // make a mobile-friendly version
+    // make a mobile version
