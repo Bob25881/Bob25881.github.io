@@ -132,9 +132,6 @@ fetch('Books(1).csv')
                 booksData.push(book);
             }
         }
-
-        // Call the main function with the booksData array
-        main(booksData);
     })
     .catch(error => console.error('Error fetching or parsing CSV:', error));
 
