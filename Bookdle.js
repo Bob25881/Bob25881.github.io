@@ -68,7 +68,7 @@ async function main(booksData) {
             return true;
         } else {
             if (guessCount === 10) {
-                alert(`Sorry, your answer of ${guess} was incorrect. You have 0 guesses remaining. The correct answer was ${title}. Play again!`);
+                document.getElementById("sadPlayAgain").innerHTML = (`Sorry, your answer of ${guess} was incorrect. You have 0 guesses remaining. The correct answer was ${title}. Play again! (P.S. The title, Bookdle, is a play again button. <3 )`);
             } else {
                 alert(`Sorry, your answer of ${guess} was incorrect. You have ${10 - guessCount} guesses remaining. Try again!`);
             }
@@ -174,5 +174,6 @@ Promise.all([
     // dont make it so have to reload the page to play again
     // dont make the you got it wrong thingie alerts
     // congratulations message modal with play again button
+    // Add a favicon
     // make the inputs vanish after submit is pressed.
     // make a mobile version
