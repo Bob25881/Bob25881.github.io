@@ -89,23 +89,25 @@ async function main(booksData) {
     let guessCount = 0;
 
     // ask the user to input their guess
-    function guessInput() {
-        return new Promise(resolve => {
-            let guessForm = document.getElementById("guessForm");
-            guessForm.addEventListener("submit", (e) => {
-                e.preventDefault();
-                let guess = document.getElementById("guess").value;
-                // Remove the event listener to prevent multiple submissions
-                guessForm.removeEventListener("submit", submitHandler);
-                // Resolve with the guess value
-                resolve(guess);
-            });
-            // Define the submit handler
-            function submitHandler(e) {
-                e.preventDefault();
-            }
+function guessInput() {
+    return new Promise(resolve => {
+        let guessForm = document.getElementById("guessForm");
+        guessForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            let guess = document.getElementById("guess").value;
+            // Clear the input field
+            document.getElementById("guess").value = ""; // Reset input field to empty string
+            // Remove the event listener to prevent multiple submissions
+            guessForm.removeEventListener("submit", submitHandler);
+            // Resolve with the guess value
+            resolve(guess);
         });
-    }
+        // Define the submit handler
+        function submitHandler(e) {
+            e.preventDefault();
+        }
+    });
+}
 
     // Start the game loop
     while (guessCount < 10) {
@@ -171,9 +173,6 @@ Promise.all([
     .catch(error => console.error('Error fetching or parsing CSV:', error));
 
     // scrollbar color dark
-    // dont make it so have to reload the page to play again
     // dont make the you got it wrong thingie alerts
     // congratulations message modal with play again button
-    // Add a favicon
-    // make the inputs vanish after submit is pressed.
     // make a mobile version
