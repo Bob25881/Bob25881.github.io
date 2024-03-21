@@ -133,3 +133,53 @@ form {
   margin-right: 20px !important;
   margin-bottom: 20px !important;
 }
+
+
+/* Media queries for mobile devices */
+@media screen and (max-width: 767px) {
+  body {
+      margin: 10px; /* Reduce margin for mobile devices */
+  }
+
+  .container {
+      padding: 0 10px; /* Adjust padding for mobile devices */
+  }
+
+  .header {
+      margin: 1rem 0; /* Reduce margin for mobile devices */
+      padding: 1rem; /* Reduce padding for mobile devices */
+  }
+
+  .section {
+      padding: 0.5rem 1rem; /* Reduce padding for mobile devices */
+  }
+
+  h1 {
+      font-size: 36px; /* Adjust font size for mobile devices */
+  }
+
+  .modal-header, h4, .close {
+      font-size: 24px; /* Adjust font size for mobile devices */
+  }
+
+  .modal-body, p {
+      font-size: 16px; /* Adjust font size for mobile devices */
+  }
+
+  .modal-footer, p {
+      font-size: 16px; /* Adjust font size for mobile devices */
+  }
+
+  button, input {
+      margin: 10px; /* Reduce margins for mobile devices */
+  }
+
+  .box {
+      height: 50vh; /* Adjust height for mobile devices */
+      margin: 10px; /* Reduce margin for mobile devices */
+  }
+
+  .hint {
+      margin: 10px; /* Reduce margins for mobile devices */
+  }
+}
