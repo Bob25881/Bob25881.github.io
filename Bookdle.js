@@ -95,8 +95,6 @@ function guessInput() {
         guessForm.addEventListener("submit", (e) => {
             e.preventDefault();
             let guess = document.getElementById("guess").value;
-            // Clear the input field
-            document.getElementById("guess").value = ""; // Reset input field to empty string
             // Remove the event listener to prevent multiple submissions
             guessForm.removeEventListener("submit", submitHandler);
             // Resolve with the guess value
@@ -137,6 +135,8 @@ function guessInput() {
         } else {
             break; // Exit loop if the game ends
         }
+        // Clear the input field
+        document.getElementById("guess").value = ""; // Reset input field to empty string
     }
 }
 
@@ -175,4 +175,4 @@ Promise.all([
     // scrollbar color dark
     // dont make the you got it wrong thingie alerts
     // congratulations message modal with play again button
-    // make a mobile version
+    // try to fix the favicon
