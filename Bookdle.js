@@ -70,7 +70,12 @@ async function main(booksData) {
             if (guessCount === 10) {
                 document.getElementById("sadPlayAgain").innerHTML = (`Sorry, your answer of ${guess} was incorrect. You have 0 guesses remaining. The correct answer was ${title}. Play again! (P.S. The title, Bookdle, is a play again button. <3 )`);
             } else {
-                alert(`Sorry, your answer of ${guess} was incorrect. You have ${10 - guessCount} guesses remaining. Try again!`);
+                if (guess === "") {
+                    alert(`You skipped your turn! you have ${10 - guessCount} guesses remaining. Try again!`)
+                }
+                else {
+                    alert(`Sorry, your answer of ${guess} was incorrect. You have ${10 - guessCount} guesses remaining. Try again!`);
+                }
             }
             return false;
         }
@@ -175,4 +180,4 @@ Promise.all([
     // scrollbar color dark
     // dont make the you got it wrong thingie alerts
     // congratulations message modal with play again button
-    // try to fix the favicon
+    // make submit button a skip button if nothing is inside it
