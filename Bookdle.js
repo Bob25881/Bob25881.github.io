@@ -64,17 +64,19 @@ async function main(booksData) {
     // If it's correct, do a congratulations message and end, if it's wrong, do a wrong message and continue.
     function congratulationsMessage(guessCount, title, guess) {
         if (guess.toLowerCase() === title.toLowerCase()) {
-            document.getElementById("congratulationsMessage").innerHTML = (`Congratulations! You're correct! The answer was ${title} and you guessed it in ${guessCount} guess/guesses!`);
+            document.getElementById("happyPlayAgain").innerHTML = (`Congratulations! You're correct! The answer was \"${title}\" and you guessed it in ${guessCount} guess/guesses!`);
+            $("#happyPlayAgainModal").modal('show');
             return true;
         } else {
             if (guessCount === 10) {
-                document.getElementById("sadPlayAgain").innerHTML = (`Sorry, your answer of ${guess} was incorrect. You have 0 guesses remaining. The correct answer was ${title}. Play again! (P.S. The title, Bookdle, is a play again button. <3 )`);
+                document.getElementById("sadPlayAgain").innerHTML = (`Sorry, your answer was incorrect. You have 0 guesses remaining. The correct answer was \"${title}.\"`);
+                $("#sadPlayAgainModal").modal('show');
             } else {
                 if (guess === "") {
                     alert(`You skipped your turn! you have ${10 - guessCount} guesses remaining. Try again!`)
                 }
                 else {
-                    alert(`Sorry, your answer of ${guess} was incorrect. You have ${10 - guessCount} guesses remaining. Try again!`);
+                    alert(`Sorry, your answer of \"${guess}\" was incorrect. You have ${10 - guessCount} guesses remaining. Try again!`);
                 }
             }
             return false;
@@ -179,5 +181,7 @@ Promise.all([
 
     // scrollbar color dark
     // dont make the you got it wrong thingie alerts
-    // congratulations message modal with play again button
     // make submit button a skip button if nothing is inside it
+    // make accounts somehow
+    // make the list of words copiable into the guess column
+    // dont show modal each play again?
