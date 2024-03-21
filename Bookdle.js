@@ -1,5 +1,6 @@
 // Main function
 async function main(booksData) {
+
     // Function to render the list of titles based on the search query
     function renderTitles(searchQuery) {
         // Clear previous list if searchQuery is empty
@@ -20,6 +21,13 @@ async function main(booksData) {
         filteredTitles.forEach(book => {
             const li = document.createElement('li');
             li.textContent = book.Title;
+
+            // Add click event listener to each title element
+            li.addEventListener('click', function() {
+                const guessInput = document.getElementById('guess');
+                guessInput.value = book.Title; // Write title into the input field
+            });
+
             titlesList.appendChild(li);
         });
     }
@@ -185,3 +193,6 @@ Promise.all([
     // make accounts somehow
     // make the list of words copiable into the guess column
     // dont show modal each play again?
+    // make the end modal have more stuff
+    // fix the genre thingie
+    // make it so I can see answers?
